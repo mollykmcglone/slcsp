@@ -13,10 +13,6 @@ describe Importer do
     let(:importer) { Importer.new("Plan") }
     let(:file_path) { "./csv_files/plans.csv" }
 
-    it 'locates the file to import based on the file_name parameter' do
-      expect { importer.import(file_path) }.to_not raise_error
-    end
-
     it 'generates a new object for each row in the csv file, excluding the header row' do
       row_count = CSV.read(file_path, headers: true).count
       results = importer.import(file_path)
