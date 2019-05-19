@@ -1,33 +1,16 @@
-require 'csv'
-
 class Importer
-  def self.import_zip_records
-    file = "./csv_files/zips.csv"
-    zip_records = []
-    CSV.foreach(file, headers: true) do |row|
-      new_record = ZipRecord.new(row)
-      zip_records << new_record
-    end
-    zip_records
+  attr_accessor :type
+
+  def initialize(class_name)
+    self.type = Kernel.const_get(class_name)
   end
 
-  def self.import_plans
-    file = "./csv_files/plans.csv"
-    plans = []
-    CSV.foreach(file, headers: true) do |row|
-      new_plan = Plan.new(row)
-      plans << new_plan
+  def import(file_path, class_name)
+    items = []
+    CSV.foreach(file_path, headers: true, converters: :numeric) do |row|
+      new_item = self.type.new(row)
+      items << new_item
     end
-    plans
-  end
-
-  def self.import_zipcodes
-    file = "./csv_files/slcsp.csv"
-    zipcodes = []
-    CSV.foreach(file, headers: true) do |row|
-      new_zipcode = Zipcode.new(row)
-      zipcodes << new_zipcode
-    end
-    zipcodes
+    items
   end
 end
