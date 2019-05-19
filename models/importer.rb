@@ -5,7 +5,7 @@ class Importer
     self.type = Kernel.const_get(class_name)
   end
 
-  def import(file_path, class_name)
+  def import(file_path)
     items = []
     CSV.foreach(file_path, headers: true, converters: :numeric) do |row|
       new_item = self.type.new(row)
