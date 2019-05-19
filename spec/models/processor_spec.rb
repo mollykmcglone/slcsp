@@ -7,6 +7,9 @@ describe Processor do
     before :each do
       allow_any_instance_of(Importer).to receive(:import)
       allow_any_instance_of(Zipcode).to receive(:determine_second_lowest_cost_silver_plan)
+      allow_any_instance_of(Processor).to receive(:initialize_data)
+      allow_any_instance_of(Processor).to receive(:process_plans)
+      allow_any_instance_of(Processor).to receive(:output_results)
     end
 
     it 'imports data, processes plan information, and outputs the result' do
@@ -70,8 +73,8 @@ describe Processor do
 
     it 'generates a CSV file with a line for each zipcode' do
       results = zipcodes
-      expect(results)
-      output = processor.send(:output_results, results)
+      destination_file_path = 'spec/fixtures/test_slcsp_result.csv'
+      output = processor.send(:output_results, results, destination_file_path)
       expect(output.length).to eq(3)
     end
   end
