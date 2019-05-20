@@ -62,10 +62,10 @@ describe Zipcode do
   end
 
   context 'determine_second_lowest_cost_silver_plan' do
-    before :each {
+    before :each do
       allow_any_instance_of(Zipcode).to receive(:find_associated_rate_areas)
       allow_any_instance_of(Zipcode).to receive(:find_associated_plans)
-    }
+    end
 
     context 'slcsp cannot be determined' do
       let!(:importer) { Importer.new("Plan")}
