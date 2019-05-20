@@ -39,15 +39,14 @@ class Processor
     data[:zipcodes]
   end
 
-  def output_results(results, destination = nil)
-    destination = './csv_files/slcsp_result.csv' unless destination
+  def output_results(results, filename = nil)
     headers = ["zipcode", "rate"]
-    output = CSV.open(destination,'w', :write_headers=> true, :headers => headers) do |file|
+    CSV() do |csv_out|
+      puts "#{headers[0]}, #{headers[1]}"
       results.each do |zipcode|
         row = [zipcode.zipcode, zipcode.slcsp]
-        file << row
+        csv_out << row
       end
     end
-    output
   end
 end

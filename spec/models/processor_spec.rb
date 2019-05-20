@@ -71,10 +71,9 @@ describe Processor do
     let!(:county_records) { Importer.new("CountyRecord").import("spec/fixtures/test_zips.csv") }
     let!(:plans) { Importer.new("Plan").import("spec/fixtures/test_plans.csv") }
 
-    it 'generates a CSV file with a line for each zipcode' do
+    it 'generates CSV with a line for each zipcode' do
       results = zipcodes
-      destination_file_path = 'spec/fixtures/test_slcsp_result.csv'
-      output = processor.send(:output_results, results, destination_file_path)
+      output = processor.send(:output_results, results)
       expect(output.length).to eq(3)
     end
   end
