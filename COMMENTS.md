@@ -10,7 +10,7 @@ Once bundler is installed, run `bundle install` from the project's root director
 
 ## Run the code
 
-This code determines the second lowest cost silver plan (SLCSP) for each zipcode in the zips.csv file located at `csv_files/zips.csv`.  
+This code determines the second lowest cost silver plan (SLCSP) for each zipcode in the slcsp.csv file located at `csv_files/slcsp.csv`.  
 
 To run the code:
 
